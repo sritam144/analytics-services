@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class LowFuelAlertResponse {
 
-	Integer count;
-	Set<VehicleFuelMatrix> vehicleDetails;
-
-	private String timeStamp;
+    Integer count;
+    Set<VehicleFuelMatrix> vehicleDetails;
+    private int lowFuelPercent = 0;
+    private String timeStamp;
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.asiczen.analytics.repository.RedisOrganizationMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,9 @@ public class RedisAnalyticsServiceImpl implements RedisService {
 
     @Autowired
     RedisConvertedMessageRepository redisRepo;
+
+    @Autowired
+    RedisOrganizationMessageRepository redisOrganizationMessageRepository;
 
     @Override
     public List<VehicleLastLocResponse> getLastLocationOfVehicles(String orgRefName) {
@@ -111,7 +115,7 @@ public class RedisAnalyticsServiceImpl implements RedisService {
                 vehicles.stream().mapToDouble(VehicleLastLocResponse::getTotalDistanceDaily).average().getAsDouble()));
 
         response.setMatrix(vehicles.stream().map(record -> new VehicleDistanceMatrix(record.getVehicleNumber(), "NA",
-                (int) Math.round(record.getTotalDistanceDaily()),getCurrentTimeStampInString())).collect(Collectors.toSet()));
+                (int) Math.round(record.getTotalDistanceDaily()), getCurrentTimeStampInString())).collect(Collectors.toSet()));
 
         response.setTimeStamp(getCurrentTimeStampInString());
 
@@ -128,13 +132,16 @@ public class RedisAnalyticsServiceImpl implements RedisService {
 
         response.setVehicleDetails(recordlist.stream().filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName))
                 .filter(record -> record.getFuel() < 11d).map(record -> new VehicleFuelMatrix(record.getVehicleNumber(),
-                        record.getDriverName(), record.getFuel(),getCurrentTimeStampInString()))
+                        record.getDriverName(), record.getFuel(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         // Count vehicles with fuel less than 10%
         response.setCount((int) recordlist.stream()
                 .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getFuel() < 11d).distinct()
                 .count());
+
+        response.setTimeStamp(getCurrentTimeStampInString());
+        response.setLowFuelPercent(redisOrganizationMessageRepository.get(orgRefName).getFuelLimit());
 
         return response;
     }
@@ -149,7 +156,7 @@ public class RedisAnalyticsServiceImpl implements RedisService {
 
         response.setVehicleList(vehicles.stream().filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName))
                 .filter(record -> record.getTotalDistanceDaily() < 50d)
-                .map(record -> new UnderUtilizedVehicleMatrix(record.getVehicleNumber(), record.getDriverName(), record.getTotalDistanceDaily(),getCurrentTimeStampInString()))
+                .map(record -> new UnderUtilizedVehicleMatrix(record.getVehicleNumber(), record.getDriverName(), record.getTotalDistanceDaily(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         // Count of under utilized vehicles.
@@ -158,6 +165,9 @@ public class RedisAnalyticsServiceImpl implements RedisService {
                 .distinct().count());
 
         response.setTimeStamp(getCurrentTimeStampInString());
+
+        response.setUnderUtilizedHours(redisOrganizationMessageRepository.get(orgRefName).getUnderUtilizedHours());
+
         return response;
     }
 
@@ -172,13 +182,16 @@ public class RedisAnalyticsServiceImpl implements RedisService {
         response.setVehicleList(vehicles.stream()
                 .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() > 80d)
                 .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(),
-                        record.getSpeed(),getCurrentTimeStampInString()))
+                        record.getSpeed(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         response.setCount((int) vehicles.stream()
                 .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() > 80d).distinct()
                 .count());
 
+        response.setOverSpeedLimit(redisOrganizationMessageRepository.get(orgRefName).getOverSpeedLimit());
+
+        response.setTimeStamp(getCurrentTimeStampInString());
         return response;
     }
 
@@ -194,11 +207,15 @@ public class RedisAnalyticsServiceImpl implements RedisService {
                 .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() < 20d
                         && item.getSpeed() > 5d)
                 .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(),
-                        record.getSpeed(),getCurrentTimeStampInString()))
+                        record.getSpeed(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         response.setCount((int) vehicles.stream().filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName)
                 && item.getSpeed() < 20d && item.getSpeed() > 5d).distinct().count());
+
+        response.setTimeStamp(getCurrentTimeStampInString());
+        response.setUnderSpeedLimit(redisOrganizationMessageRepository.get(orgRefName).getUnderSpeedLimit());
+
 
         return response;
 

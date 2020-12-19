@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 public class OverSpeedVehiclesResponse {
 
-	private int count;
-	private Set<VehicleSpeedMatrix> vehicleList;
-	private String timeStamp;
+    private int count;
+    private Set<VehicleSpeedMatrix> vehicleList;
+    private String timeStamp;
+    private int overSpeedLimit = 0;
 }

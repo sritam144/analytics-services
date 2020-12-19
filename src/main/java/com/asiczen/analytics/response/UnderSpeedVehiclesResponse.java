@@ -15,6 +15,7 @@ public class UnderSpeedVehiclesResponse {
 
 	private int count;
 	private Set<VehicleSpeedMatrix> vehicleList;
+	private int underSpeedLimit=0;
 
 	private String timeStamp;
 }

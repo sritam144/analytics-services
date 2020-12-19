@@ -1,5 +1,6 @@
 package com.asiczen.analytics.config;
 
+import com.asiczen.analytics.model.OrganizationView;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -39,4 +40,17 @@ public class RedisConfig {
 
 		return template;
 	}
+
+	@Bean(name = "organizationtemplate")
+	public RedisTemplate<String, OrganizationView> redisOrganizationTemplate() {
+		RedisTemplate<String, OrganizationView> template = new RedisTemplate<>();
+		template.setConnectionFactory(jedisConnectionFactory());
+
+		template.setKeySerializer(new StringRedisSerializer());
+		template.setHashKeySerializer(new StringRedisSerializer());
+		template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper()));
+
+		return template;
+	}
+
 }

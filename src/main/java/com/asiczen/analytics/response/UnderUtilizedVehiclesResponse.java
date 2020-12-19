@@ -15,6 +15,9 @@ public class UnderUtilizedVehiclesResponse {
 
 	private Integer count;
 	private Set<UnderUtilizedVehicleMatrix> vehicleList;
+
+	private int underUtilizedHours = 0;
+
 	private String timeStamp;
 
 }
