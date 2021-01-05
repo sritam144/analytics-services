@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.util.Date;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +19,6 @@ public class UnderUtilizedVehiclesResponse {
 
 	private int underUtilizedHours = 0;
 
-	private String timeStamp;
+	private Date timeStamp;
 
 }

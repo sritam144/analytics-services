@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.util.Date;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +16,5 @@ public class FleetUsageResponse {
 	private int average;
 	private Set<VehicleDistanceMatrix> matrix;
 	
-	private String timeStamp;
+	private Date timeStamp;
 }

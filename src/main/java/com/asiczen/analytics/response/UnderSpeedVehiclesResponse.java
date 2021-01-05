@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.util.Date;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,5 @@ public class UnderSpeedVehiclesResponse {
 	private Set<VehicleSpeedMatrix> vehicleList;
 	private int underSpeedLimit=0;
 
-	private String timeStamp;
+	private Date timeStamp;
 }

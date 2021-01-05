@@ -1,0 +1,29 @@
+2021-01-06 00:12:58.713  INFO 27004 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Starting AnalyticsServicesApplicationTests on LAPTOP-ET63CILL with PID 27004 (started by sanjeet in C:\SCORPIOUS_WORKSPACE\current_working\analytics-services)
+2021-01-06 00:12:58.715 DEBUG 27004 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2021-01-06 00:12:58.716  INFO 27004 --- [main] c.a.a.AnalyticsServicesApplicationTests  : No active profile set, falling back to default profiles: default
+2021-01-06 00:13:06.248  INFO 27004 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
+2021-01-06 00:13:08.357  INFO 27004 --- [cluster-ClusterId{value='5ff4b33adec3fd7a9b454cf9', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server 127.0.0.1:27017
+
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:70) ~[mongodb-driver-core-4.0.5.jar:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:127) ~[mongodb-driver-core-4.0.5.jar:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117) ~[mongodb-driver-core-4.0.5.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method) ~[na:na]
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107) ~[na:na]
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399) ~[na:na]
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242) ~[na:na]
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:608) ~[na:na]
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:63) ~[mongodb-driver-core-4.0.5.jar:na]
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:79) ~[mongodb-driver-core-4.0.5.jar:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:65) ~[mongodb-driver-core-4.0.5.jar:na]
+	... 3 common frames omitted
+
+2021-01-06 00:13:11.038  INFO 27004 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-06 00:13:13.311  INFO 27004 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-06 00:13:13.342  INFO 27004 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-06 00:13:13.401  INFO 27004 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-06 00:13:13.819  INFO 27004 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 15.973 seconds (JVM running for 17.831)

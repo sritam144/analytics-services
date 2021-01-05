@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.util.Date;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,6 @@ public class OverSpeedVehiclesResponse {
 
     private int count;
     private Set<VehicleSpeedMatrix> vehicleList;
-    private String timeStamp;
+    private Date timeStamp;
     private int overSpeedLimit = 0;
 }

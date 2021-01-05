@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +17,5 @@ public class UnderUtilizedVehicleMatrix {
 	private String driverName;
 	private double distanceTraveled;
 
-	private String timeStamp;
+	private Date timeStamp;
 }
