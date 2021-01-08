@@ -182,8 +182,7 @@ public class RedisAnalyticsServiceImpl implements RedisService {
 
         response.setVehicleList(vehicles.stream()
                 .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() > redisOrganizationMessageRepository.get(orgRefName).getOverSpeedLimit())
-                .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(),
-                        record.getSpeed(), getCurrentTimeStampInString()))
+                .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(), record.getSpeed(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         response.setCount((int) vehicles.stream()
@@ -205,10 +204,8 @@ public class RedisAnalyticsServiceImpl implements RedisService {
         List<VehicleLastLocResponse> vehicles = redisRepo.getLastLocationAllVehicles();
 
         response.setVehicleList(vehicles.stream()
-                .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() < 20d
-                        && item.getSpeed() > 5d)
-                .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(),
-                        record.getSpeed(), getCurrentTimeStampInString()))
+                .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() < 20d && item.getSpeed() > 5d)
+                .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(), record.getSpeed(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         response.setCount((int) vehicles.stream().filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName)

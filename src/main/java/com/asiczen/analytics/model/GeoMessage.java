@@ -25,4 +25,6 @@ public class GeoMessage {
 	private int unplugged;
 	private int fuel;
 	private int speed;
+
+	private double calulatedDistance;
 }
