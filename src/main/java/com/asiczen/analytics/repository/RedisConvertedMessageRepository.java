@@ -74,7 +74,7 @@ public class RedisConvertedMessageRepository {
 		Date currentTime = new Date(System.currentTimeMillis());
 		long timeDifference = currentTime.getTime() - message.getTimestamp().getTime();
 
-		response.setCurrent((TimeUnit.SECONDS.toSeconds(timeDifference) <= 300) ? true : false);
+		response.setCurrent((TimeUnit.MILLISECONDS.toSeconds(timeDifference) <= 300) ? true : false);
 
 		try {
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

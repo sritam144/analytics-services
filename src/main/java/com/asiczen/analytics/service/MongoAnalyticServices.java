@@ -8,6 +8,6 @@ import com.asiczen.analytics.response.VehicleHistoryResponse;
 public interface MongoAnalyticServices {
 
 	//Find the vehicle geo data for a date range
-	public VehicleHistoryResponse findByvehicleNumberAndTimeStampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime);
+	public VehicleHistoryResponse findByVehicleNumberAndTimeStampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime);
 
 }

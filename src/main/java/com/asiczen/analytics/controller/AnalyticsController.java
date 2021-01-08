@@ -46,7 +46,7 @@ public class AnalyticsController {
 
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ApiResponse(HttpStatus.OK.value(), "Vehicle history extracted successfully",
-						mongoService.findByvehicleNumberAndTimeStampBetween(request.getVehicleNumber(),	request.getStartDateTime(), request.getEndDateTime())));
+						mongoService.findByVehicleNumberAndTimeStampBetween(request.getVehicleNumber(),	request.getStartDateTime(), request.getEndDateTime())));
 	}
 
 	@GetMapping("/lastpositiondtl")

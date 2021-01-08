@@ -41,30 +41,34 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
 
         log.info("Getting vehicle info from mongo");
 
+
         if (geoMessages.isPresent()) {
             response.setVehicleNumber(vehicleNumber);
 
             locationList = geoMessages.get().stream()
                     .map(geoMessage -> new Location(geoMessage.getLocation().getCoordinates().get(0), geoMessage.getLocation().getCoordinates().get(1)))
                     .collect(Collectors.toList());
+            try {
 
-            double averageSpeed = geoMessages.get().stream()
-                    .filter(record -> (record.getSpeed() > 0))
-                    .map(record -> record.getSpeed())
-                    .mapToInt(intValue -> intValue).average().getAsDouble();
+                response.setLocationlist(locationList);
 
-            double totalDistance = geoMessages.get().stream()
-                    .filter(record -> record.getCalulatedDistance() > 0)
-                    .map(record -> record.getCalulatedDistance())
-                    .mapToDouble(r -> r).sum();
+                double averageSpeed = geoMessages.get().stream()
+                        .filter(record -> (record.getSpeed() > 0d))
+                        .map(record -> record.getSpeed())
+                        .mapToInt(intValue -> intValue).average().getAsDouble();
+                response.setAvgSpeed(averageSpeed);
+
+                double totalDistance = geoMessages.get().stream()
+                        .filter(record -> record.getCalulatedDistance() > 0d)
+                        .map(record -> record.getCalulatedDistance())
+                        .mapToDouble(r -> r).sum();
 
 
-            response.setAvgSpeed(averageSpeed);
-            response.setLocationlist(locationList);
-
-
-            response.setAvgmilage(0);
-            response.setTotalDistance(Math.abs(totalDistance));
+                response.setAvgmilage(0);
+                response.setTotalDistance(Math.abs(totalDistance));
+            } catch (Exception e) {
+                log.error("Error  while getting historical data");
+            }
             return response;
 
         } else {
