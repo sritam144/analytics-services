@@ -80,15 +80,16 @@ public class RedisAnalyticsServiceImpl implements RedisService {
         return new Date();
     }
 
-    private Long timeDifferenceinMinutes(String date) {
+    private Long timeDifferenceinMinutes(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = dateFormat.format(date);
         Date time = null;
 
         long timeinMinutes = 0L;
 
         try {
             Date currentTime = new Date(System.currentTimeMillis());
-            time = dateFormat.parse(date);
+            time = dateFormat.parse(dateString);
             long difference = (currentTime.getTime() - time.getTime());
             timeinMinutes = TimeUnit.MILLISECONDS.toMinutes(difference);
         } catch (ParseException e) {

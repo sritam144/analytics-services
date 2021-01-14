@@ -155,3 +155,14 @@
 2021-01-14 10:38:10.142  INFO 27852 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
 2021-01-14 10:38:10.199  INFO 27852 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
 2021-01-14 10:38:10.531  INFO 27852 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 8.417 seconds (JVM running for 10.058)
+2021-01-14 13:42:25.728  INFO 19360 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Starting AnalyticsServicesApplicationTests on azCom42 with PID 19360 (started by spmishra in C:\Users\spmishra\Desktop\scorpious-server-services\updated-services\analytics-services)
+2021-01-14 13:42:25.752 DEBUG 19360 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2021-01-14 13:42:25.753  INFO 19360 --- [main] c.a.a.AnalyticsServicesApplicationTests  : No active profile set, falling back to default profiles: default
+2021-01-14 13:42:33.350  INFO 19360 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
+2021-01-14 13:42:34.223  INFO 19360 --- [cluster-ClusterId{value='5ffffcf1fb152f4f333ff680', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:42}] to 127.0.0.1:27017
+2021-01-14 13:42:34.233  INFO 19360 --- [cluster-ClusterId{value='5ffffcf1fb152f4f333ff680', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=5304700}
+2021-01-14 13:42:37.604  INFO 19360 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-14 13:42:39.223  INFO 19360 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-14 13:42:39.264  INFO 19360 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-14 13:42:39.334  INFO 19360 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-14 13:42:39.818  INFO 19360 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 15.197 seconds (JVM running for 18.571)
