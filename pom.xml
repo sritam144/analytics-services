@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.asiczen.analytics</groupId>
 	<artifactId>analytics-services</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>analytics-services</name>
 	<description>Service fot Analytics data display</description>
 

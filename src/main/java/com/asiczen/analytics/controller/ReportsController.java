@@ -1,16 +1,15 @@
 package com.asiczen.analytics.controller;
 
+import com.asiczen.analytics.response.GraphResponseDTO;
+import com.asiczen.analytics.response.VehicleStatusCounter;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.asiczen.analytics.dto.VehicleDistanceAverage;
 import com.asiczen.analytics.dto.VehiclevsHours;
@@ -25,25 +24,44 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReportsController {
 
-	@Autowired
-	EndOfDayAnalyticsServices service;
+    @Autowired
+    EndOfDayAnalyticsServices service;
 
-	@PostMapping("/distancevehicles")
-	@ResponseStatus(HttpStatus.OK)
-	public List<VehicleDistancevsDate> getVehicleDistanceGraph(@Valid @RequestBody OrgLevelRequest request) {
-		return service.getVehiclevsDistancevsDate(request);
-	}
+    @PostMapping("/distancevehicles")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VehicleDistancevsDate> getVehicleDistanceGraph(@Valid @RequestBody OrgLevelRequest request) {
+        return service.getVehiclevsDistancevsDate(request);
+    }
 
-	@PostMapping("/distancevehiclesavg")
-	@ResponseStatus(HttpStatus.OK)
-	public List<VehicleDistanceAverage> getVehicleDistanceAverageGraph(@Valid @RequestBody OrgLevelRequest request) {
-		return service.getVehicleDistancevsAvrageDistanceOverDateRange(request);
-	}
+    @PostMapping("/distancevehiclesavg")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VehicleDistanceAverage> getVehicleDistanceAverageGraph(@Valid @RequestBody OrgLevelRequest request) {
+        return service.getVehicleDistancevsAvrageDistanceOverDateRange(request);
+    }
 
-	@PostMapping("/vehiclevshours")
-	@ResponseStatus(HttpStatus.OK)
-	public List<VehiclevsHours> getVehicleidleRunningHours(@Valid @RequestBody OrgLevelRequest request) {
-		return service.getVehicleHours(request);
-	}
+    @PostMapping("/vehiclevshours")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VehiclevsHours> getVehicleidleRunningHours(@Valid @RequestBody OrgLevelRequest request) {
+        return service.getVehicleHours(request);
+    }
 
+
+    // Count the number of vehicles active,inactive,idle over a period of time group by days.
+    // Front end should send the date range at least of 1 week and maximum of 1 month.
+
+    @PostMapping("/vehiclestatuscounter")
+    @ResponseStatus(HttpStatus.OK)
+    public GraphResponseDTO getVehicleStatusCountGroupByDates(@Valid @RequestBody OrgLevelRequest request) {
+        return new GraphResponseDTO(new Date(), service.getVehicleStatusCountGroupByDates(request));
+    }
+
+    @PostMapping("/activevehiclevsdistance")
+    @ResponseStatus(HttpStatus.OK)
+    public GraphResponseDTO getActiveVehicleVsDistanceGroupByDate(@Valid @RequestBody OrgLevelRequest request) {
+        return new GraphResponseDTO(new Date(), service.getActiveVehicleVsDistanceGroupByDate(request));
+    }
+
+//    @PostMapping("/activevehiclehours")
+//    @ResponseStatus(HttpStatus.OK)
+//    public GraphResponseDTO
 }

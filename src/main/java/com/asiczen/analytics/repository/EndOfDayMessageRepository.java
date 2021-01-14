@@ -12,4 +12,6 @@ import com.asiczen.analytics.model.EndOfDayMessage;
 public interface EndOfDayMessageRepository extends MongoRepository<EndOfDayMessage, String> {
 
 	List<EndOfDayMessage> findByorgRefNameAndTimestampBetween(String orgRefName, Date fromDate, Date toDate);
+
+	List<EndOfDayMessage> findByOrgRefNameAndTimestampBetween(String orgRefName, Date fromDate, Date toDate);
 }

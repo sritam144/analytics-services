@@ -1,5 +1,6 @@
 package com.asiczen.analytics.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
