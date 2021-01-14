@@ -12,5 +12,8 @@ import com.asiczen.analytics.model.GeoMessage;
 @Repository
 public interface GeoMessageRepository extends MongoRepository<GeoMessage, String> {
 
-	public Optional<List<GeoMessage>> findByvehicleNumberAndTimeStampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime);
+	Optional<List<GeoMessage>> findByVehicleNumberAndTimestampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime);
+
+	Optional<List<GeoMessage>> findByVehicleNumber(String vehicleNumber);
+
 }

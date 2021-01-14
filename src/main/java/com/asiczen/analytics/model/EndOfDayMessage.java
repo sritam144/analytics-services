@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = false)
-@Document(collection = "vehiclemessagesprod")
+@Document(collection = "endofdaymessages")
 public class EndOfDayMessage {
 
 	// Original Fields

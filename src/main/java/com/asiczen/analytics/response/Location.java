@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,5 @@ public class Location {
 
 	private double lng;
 	private double lat;
-	//private LocalDateTime timeStamp;
+	private LocalDateTime messageTimeStamp;
 }

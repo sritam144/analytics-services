@@ -14,17 +14,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Document(collection = "vehiclemessages")
+@Document(collection = "vehiclemessagesprod")
 public class GeoMessage {
 
-	private GeoJsonPoint location;
-	private String vehicleNumber;
-	private String vehicleType;
-	private String imeiNumber;
-	private LocalDateTime timeStamp;
-	private int unplugged;
-	private int fuel;
-	private int speed;
+    private String vehicleNumber;
+    private String vehicleType;
+    private String imeiNumber;
+    private LocalDateTime timestamp;
+    private int unplugged;
+    private int fuel;
+    private int speed;
 
-	private double calulatedDistance;
+    private double lat;
+    private double lng;
+
+    private double calulatedDistance;
 }

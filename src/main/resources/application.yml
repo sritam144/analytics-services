@@ -7,6 +7,8 @@ spring:
       #uri: mongodb+srv://root:password007@cluster0-cjhrd.gcp.mongodb.net/scorpious-demo?retryWrites=true&w=majority
       host: 127.0.0.1
       port: 27017
+      auto-index-creation: true
+
       
         
   redis:
@@ -21,6 +23,7 @@ logging:
   file:
     name: ./analytics-service.log
     max-size: 10 MB      
-    
+
     
 app.idle.time: 900000
+

@@ -1,5 +1,6 @@
 package com.asiczen.analytics.response;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +20,5 @@ public class VehicleHistoryResponse {
 	private double totalDistance;
 	private List<Location> locationlist;
 
-	private String timeStamp;
+	private Date timeStamp;
 }

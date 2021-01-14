@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @NoArgsConstructor
@@ -19,13 +20,15 @@ import lombok.ToString;
 @ToString
 public class VehicleHistoryRequest {
 
-	@NotNull(message="vehicle number cannot be missing or empty")
-	@Pattern(regexp="^[a-zA-Z0-9]+$",message="CehicleNumber can't have special characters")
-	String vehicleNumber;
-	
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	LocalDateTime startDateTime;
-	
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	LocalDateTime endDateTime;
+    @NotNull(message = "vehicle number cannot be missing or empty")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "VehicleNumber can't have special characters")
+    String vehicleNumber;
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    LocalDateTime startDateTime;
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    LocalDateTime endDateTime;
 }
