@@ -76,14 +76,7 @@ public class RedisConvertedMessageRepository {
 
 		response.setCurrent((TimeUnit.MILLISECONDS.toSeconds(timeDifference) <= 300) ? true : false);
 
-		try {
-			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			String dateString = dateFormat.format(message.getTimestamp());
-			response.setLastTime(dateString);
-		} catch (Exception ep) {
-			log.error("Error while converting the date , so time stamp will be null");
-			response.setLastTime("NA");
-		}
+		response.setLastTime(message.getTimestamp());
 
 		return response;
 	}

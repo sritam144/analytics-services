@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class Location {
 
-	private double lng;
 	private double lat;
+	private double lng;
 	private LocalDateTime messageTimeStamp;
 }

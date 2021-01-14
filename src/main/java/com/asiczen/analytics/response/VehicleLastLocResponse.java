@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class VehicleLastLocResponse {
 	private double lng;
 	private double lat;
 	private String vehicleType;
-	private String lastTime;
+	private Date lastTime;
 	private String driverName;
 	private String driverContact;
 	private String orgRefName;
