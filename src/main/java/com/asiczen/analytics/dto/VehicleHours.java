@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehiclevsHours {
+public class VehicleHours {
 
 	public String vehicleNumber;
 	public int idleHourEngineOn;

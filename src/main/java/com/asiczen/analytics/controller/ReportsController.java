@@ -1,5 +1,6 @@
 package com.asiczen.analytics.controller;
 
+import com.asiczen.analytics.dto.VehicleHours;
 import com.asiczen.analytics.response.GraphResponseDTO;
 import com.asiczen.analytics.response.VehicleStatusCounter;
 import java.util.Date;
@@ -12,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.asiczen.analytics.dto.VehicleDistanceAverage;
-import com.asiczen.analytics.dto.VehiclevsHours;
 import com.asiczen.analytics.request.OrgLevelRequest;
 import com.asiczen.analytics.response.VehicleDistancevsDate;
 import com.asiczen.analytics.service.EndOfDayAnalyticsServices;
@@ -41,7 +41,7 @@ public class ReportsController {
 
     @PostMapping("/vehiclevshours")
     @ResponseStatus(HttpStatus.OK)
-    public List<VehiclevsHours> getVehicleidleRunningHours(@Valid @RequestBody OrgLevelRequest request) {
+    public List<VehicleHours> getVehicleidleRunningHours(@Valid @RequestBody OrgLevelRequest request) {
         return service.getVehicleHours(request);
     }
 
@@ -63,5 +63,7 @@ public class ReportsController {
 
 //    @PostMapping("/activevehiclehours")
 //    @ResponseStatus(HttpStatus.OK)
-//    public GraphResponseDTO
+//    public GraphResponseDTO getVehicleActivityHours(@Valid @RequestBody OrgLevelRequest request) {
+//        return new GraphResponseDTO(new Date(), service.getVehicleActivityHoursGroupByDate(request));
+//    }
 }

@@ -1,11 +1,40 @@
-2021-01-15 00:23:41.979  INFO 159048 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Starting AnalyticsServicesApplicationTests on LAPTOP-ET63CILL with PID 159048 (started by sanjeet in C:\SCORPIOUS_WORKSPACE\current_working\analytics-services)
-2021-01-15 00:23:41.987 DEBUG 159048 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
-2021-01-15 00:23:42.000  INFO 159048 --- [main] c.a.a.AnalyticsServicesApplicationTests  : No active profile set, falling back to default profiles: default
-2021-01-15 00:23:46.457  INFO 159048 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
-2021-01-15 00:23:46.637  INFO 159048 --- [cluster-ClusterId{value='6000933af73fd71192e85a68', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:79}] to 127.0.0.1:27017
-2021-01-15 00:23:46.648  INFO 159048 --- [cluster-ClusterId{value='6000933af73fd71192e85a68', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4437900}
-2021-01-15 00:23:51.763  INFO 159048 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-01-15 00:23:53.835  INFO 159048 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-01-15 00:23:53.896  INFO 159048 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-01-15 00:23:53.964  INFO 159048 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-01-15 00:23:54.429  INFO 159048 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 13.45 seconds (JVM running for 15.539)
+2021-01-16 00:00:00.601  INFO 43796 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-16 00:00:00.690  INFO 43796 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-16 00:00:00.800  INFO 43796 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-16 00:00:01.293  INFO 43796 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 11.281 seconds (JVM running for 13.973)
+2021-01-16 00:39:37.570  INFO 47456 --- [restartedMain] c.a.a.AnalyticsServicesApplication       : Starting AnalyticsServicesApplication on LAPTOP-ET63CILL with PID 47456 (C:\SCORPIOUS_WORKSPACE\current_working\analytics-services\target\classes started by sanjeet in C:\SCORPIOUS_WORKSPACE\current_working\analytics-services)
+2021-01-16 00:39:37.590 DEBUG 47456 --- [restartedMain] c.a.a.AnalyticsServicesApplication       : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2021-01-16 00:39:37.592  INFO 47456 --- [restartedMain] c.a.a.AnalyticsServicesApplication       : No active profile set, falling back to default profiles: default
+2021-01-16 00:39:42.311  INFO 47456 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-16 00:39:42.312  INFO 47456 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2021-01-16 00:39:42.505  INFO 47456 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-16 00:39:43.100  INFO 47456 --- [restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
+2021-01-16 00:39:43.218  INFO 47456 --- [cluster-ClusterId{value='6001e877909f5d7df2d860e5', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:3}] to 127.0.0.1:27017
+2021-01-16 00:39:43.231  INFO 47456 --- [cluster-ClusterId{value='6001e877909f5d7df2d860e5', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=6190600}
+2021-01-16 00:39:45.109  INFO 47456 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-16 00:39:45.967  INFO 47456 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-16 00:39:46.022  INFO 47456 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-16 00:39:46.102  INFO 47456 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-16 00:39:46.613  INFO 47456 --- [restartedMain] c.a.a.AnalyticsServicesApplication       : Started AnalyticsServicesApplication in 10.189 seconds (JVM running for 11.629)
+2021-01-16 00:53:00.618  INFO 37524 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Starting AnalyticsServicesApplicationTests on LAPTOP-ET63CILL with PID 37524 (started by sanjeet in C:\SCORPIOUS_WORKSPACE\current_working\analytics-services)
+2021-01-16 00:53:00.620 DEBUG 37524 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2021-01-16 00:53:00.622  INFO 37524 --- [main] c.a.a.AnalyticsServicesApplicationTests  : No active profile set, falling back to default profiles: default
+2021-01-16 00:53:07.172  INFO 37524 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
+2021-01-16 00:53:07.303  INFO 37524 --- [cluster-ClusterId{value='6001eb9b8a5ab0504aed7a32', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:4}] to 127.0.0.1:27017
+2021-01-16 00:53:07.315  INFO 37524 --- [cluster-ClusterId{value='6001eb9b8a5ab0504aed7a32', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=6596900}
+2021-01-16 00:53:12.926  INFO 37524 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-16 00:53:15.819  INFO 37524 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-16 00:53:15.912  INFO 37524 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-16 00:53:16.019  INFO 37524 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-16 00:53:16.713  INFO 37524 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 17.342 seconds (JVM running for 19.707)
+2021-01-16 01:04:41.689  INFO 53336 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Starting AnalyticsServicesApplicationTests on LAPTOP-ET63CILL with PID 53336 (started by sanjeet in C:\SCORPIOUS_WORKSPACE\current_working\analytics-services)
+2021-01-16 01:04:41.690 DEBUG 53336 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2021-01-16 01:04:41.692  INFO 53336 --- [main] c.a.a.AnalyticsServicesApplicationTests  : No active profile set, falling back to default profiles: default
+2021-01-16 01:04:45.886  INFO 53336 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
+2021-01-16 01:04:45.991  INFO 53336 --- [cluster-ClusterId{value='6001ee552959d739748185d3', description='null'}-127.0.0.1:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:5}] to 127.0.0.1:27017
+2021-01-16 01:04:46.000  INFO 53336 --- [cluster-ClusterId{value='6001ee552959d739748185d3', description='null'}-127.0.0.1:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4530000}
+2021-01-16 01:04:49.880  INFO 53336 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-01-16 01:04:52.179  INFO 53336 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-16 01:04:52.252  INFO 53336 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-16 01:04:52.380  INFO 53336 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-16 01:04:52.942  INFO 53336 --- [main] c.a.a.AnalyticsServicesApplicationTests  : Started AnalyticsServicesApplicationTests in 12.165 seconds (JVM running for 14.169)
