@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.asiczen.analytics.dto.VehicleDistance;
 import com.asiczen.analytics.dto.VehicleDistanceAverage;
-import com.asiczen.analytics.dto.VehicleHours;
 import com.asiczen.analytics.model.EndOfDayMessage;
 import com.asiczen.analytics.repository.EndOfDayMessageRepository;
 import com.asiczen.analytics.request.OrgLevelRequest;
@@ -63,7 +62,8 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
                 .filter(message -> message.getCalculatedDailyDistance() > 1)
                 .mapToDouble(EndOfDayMessage::getCalculatedDailyDistance)
                 .average()
-                .getAsDouble();
+                .orElse(0);
+
 
         return messages.stream()
                 .map(record -> new VehicleDistance(record.getVehicleNumber(), record.getCalculatedDailyDistance()))
@@ -78,26 +78,6 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         List<EndOfDayMessage> messages = eodMessageRepo.findByorgRefNameAndTimestampBetween(request.getOrgRefName(),
                 request.getFromDate(), request.getToDate());
-
-//		 new Foo(1, "P1", 300, 400), 
-//         new Foo(2, "P2", 600, 400),
-//         new Foo(3, "P3", 30, 20),
-//         new Foo(3, "P3", 70, 20),
-//         new Foo(1, "P1", 360, 40),
-//         new Foo(4, "P4", 320, 200),
-//         new Foo(4, "P4", 500, 900));
-//         
-//         [Foo(1,P1,660,440), Foo(2,P2,600,400), Foo(3,P3,100,40), Foo(4,P4,820,1100)]
-
-//		messsages.stream()
-//				.map(record -> new VehiclevsHours(record.getVehicleNumber(), record.getIdleKeyOnTime(),record.getIdleKeyOffTime(), record.getVehicleMovingTime()))
-//				.collect(Collectors.groupingBy(item -> item.getVehicleNumber())).entrySet().stream()
-//				.map(e -> e.getValue().stream()
-//						.reduce((f1, f2) -> new VehiclevsHours(f1.vehicleNumber,
-//															   f1.idleHourEngineOn + f2.idleHourEngineOn, 
-//															   f1.idleHourEngineOff + f2.idleHourEngineOff,
-//															   f1.movingEngineOn + f2.movingEngineOn)))
-//				.map(f -> f.get()).collect(Collectors.toList());
 
         return messages.stream()
                 .map(record -> new VehicleHours(record.getVehicleNumber(), record.getIdleKeyOnTime(), record.getIdleKeyOffTime(), record.getVehicleMovingTime()))
@@ -133,7 +113,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
     @Override
     public List<MessageCounter> getMessageCounter(OrgLevelRequest request) {
-        //List<MessageCounter> response = new ArrayList<>();
+        //List<MessageCounter> response = new ArrayList<>(); // Not used
         return new ArrayList<>();
     }
 
@@ -141,7 +121,6 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
     public List<VehicleStatusCounter> getVehicleStatusCountGroupByDates(OrgLevelRequest request) {
 
         log.info("Date range from endpoint {} {} ", request.getFromDate(), request.getToDate());
-        // Step 1 : get the messages for a date range
 
         List<EndOfDayMessage> messages = eodMessageRepo.findByorgRefNameAndTimestampBetween(request.getOrgRefName(), request.getFromDate(), request.getToDate());
 
@@ -160,6 +139,8 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
                 .stream()
                 .map(entry -> new VehicleStatusCounter(entry.getValue().intValue(), 0, entry.getKey()))
                 .forEach(record -> updateResponse(record, response));
+
+        Collections.sort(response);
 
         return response;
 
@@ -183,8 +164,9 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
                 .filter(message -> message.getCalculatedDailyDistance() > CALCULATED_DAILY_DISTANCE)
                 .collect(Collectors.groupingBy(record -> convertInToDateMonthYear(record), Collectors.counting()));
 
-        response.stream().forEach(record -> updateActiveVehicleCountResponse(map, record));
+        response.forEach(record -> updateActiveVehicleCountResponse(map, record));
 
+        Collections.sort(response);
 
         return response;
     }
@@ -207,7 +189,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
     }
 
     private void updateResponse(VehicleStatusCounter input, List<VehicleStatusCounter> response) {
-        response.stream().filter(record -> record.getDayOfMonth() == input.getDayOfMonth())
+        response.stream().filter(record -> record.getDayOfMonth().equalsIgnoreCase(input.getDayOfMonth()))
                 .forEach(record -> record.setIdleVehicleCount(input.getIdleVehicleCount()));
     }
 
