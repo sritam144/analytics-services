@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.mongodb.client.model.geojson.Point;
@@ -40,7 +39,6 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
         Optional<List<GeoMessage>> geoMessages = messageRepo.findByVehicleNumberAndTimestampBetween(vehicleNumber, startTime, endTime);
 
         VehicleHistoryResponse response = new VehicleHistoryResponse();
-        List<Location> locationList = new ArrayList<>();
 
         log.trace("Looping on data set Received.");
 
@@ -49,7 +47,7 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
 
             log.info("Some data are present so will process the data");
 
-            locationList = geoMessages.get()
+            List<Location> locationList = geoMessages.get()
                     .stream()
                     .map(geoMessage -> new Location(geoMessage.getLat(), geoMessage.getLng(), geoMessage.getTimestamp()))
                     .collect(Collectors.toList());
@@ -61,29 +59,6 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
 
             geoMessages.get().stream().forEach(record -> log.info("Speed {} {} {}", record.getSpeed(), record.getCalulatedDistance(), record.getFuel()));
 
-
-//            try {
-//                double averageSpeed = geoMessages.get().stream()
-//                        .filter(record -> (record.getSpeed() > 0d))
-//                        .map(record -> record.getSpeed())
-//                        .mapToInt(intValue -> intValue)
-//                        .average()
-//                        .getAsDouble();
-//                response.setAvgSpeed(averageSpeed);
-//
-//                double totalDistance = geoMessages.get().stream()
-//                        .filter(record -> record.getCalulatedDistance() > 0d)
-//                        .map(record -> record.getCalulatedDistance())
-//                        .mapToDouble(r -> r)
-//                        .sum();
-//
-//                response.setAvgmilage(0);
-//                response.setTotalDistance(Math.abs(totalDistance));
-//            } catch (Exception e) {
-//                log.error("Error  while getting historical data");
-//                log.error(">>>>>>>>>>>>> {}", e.getLocalizedMessage());
-//                e.printStackTrace();
-//            }
             return response;
 
         } else {

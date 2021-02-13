@@ -1,5 +1,6 @@
 package com.asiczen.analytics.repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,5 +14,9 @@ public interface EndOfDayMessageRepository extends MongoRepository<EndOfDayMessa
 
 	List<EndOfDayMessage> findByorgRefNameAndTimestampBetween(String orgRefName, Date fromDate, Date toDate);
 
-	List<EndOfDayMessage> findByOrgRefNameAndTimestampBetween(String orgRefName, Date fromDate, Date toDate);
+	List<EndOfDayMessage> findByorgRefNameAndTimestampBetween(String orgRefName, LocalDateTime fromDate, LocalDateTime toDate);
+
+	//List<EndOfDayMessage> findByOrgRefNameAndTimestampBetween(String orgRefName, Date fromDate, Date toDate);
+
+	List<EndOfDayMessage> findByOrgRefNameAndTimestampBetweenAndVehicleNumber(String orgRefName, Date fromDate, Date toDate,String vehicleNumber);
 }

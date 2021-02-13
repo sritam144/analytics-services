@@ -75,8 +75,6 @@ public class RedisAnalyticsServiceImpl implements RedisService {
     }
 
     private Date getCurrentTimeStampInString() {
-
-        //return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
         return new Date();
     }
 

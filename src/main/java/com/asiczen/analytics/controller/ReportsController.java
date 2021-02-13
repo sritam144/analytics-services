@@ -1,6 +1,9 @@
 package com.asiczen.analytics.controller;
 
 import com.asiczen.analytics.dto.VehicleHours;
+import com.asiczen.analytics.request.OrgAndDateLevelRequest;
+import com.asiczen.analytics.request.OrganizationVehicleLevelRequest;
+import com.asiczen.analytics.response.DistanceByVehicleDTO;
 import com.asiczen.analytics.response.GraphResponseDTO;
 import com.asiczen.analytics.response.VehicleStatusCounter;
 import java.util.Date;
@@ -66,4 +69,17 @@ public class ReportsController {
 //    public GraphResponseDTO getVehicleActivityHours(@Valid @RequestBody OrgLevelRequest request) {
 //        return new GraphResponseDTO(new Date(), service.getVehicleActivityHoursGroupByDate(request));
 //    }
+
+
+    @GetMapping("/distanceByVehicle")
+    @ResponseStatus(HttpStatus.OK)
+    public GraphResponseDTO getDistanceByVehicleNumberAndDates(@Valid @RequestBody OrganizationVehicleLevelRequest organizationVehicleLevelRequest) {
+        return new GraphResponseDTO(new Date(), service.getDistanceByVehicleAndDates(organizationVehicleLevelRequest));
+    }
+
+    @GetMapping("/distanceByDateAndVehicle")
+    @ResponseStatus(HttpStatus.OK)
+    public GraphResponseDTO getDistanceByOrganizationAndDate(@Valid @RequestBody OrgAndDateLevelRequest orgAndDateLevelRequest) {
+        return new GraphResponseDTO(new Date(), service.getDistanceByDateAndOrganization(orgAndDateLevelRequest));
+    }
 }

@@ -1,9 +1,12 @@
 package com.asiczen.analytics.service.impl;
 
 import com.asiczen.analytics.dto.VehicleHours;
+import com.asiczen.analytics.request.OrgAndDateLevelRequest;
+import com.asiczen.analytics.request.OrganizationVehicleLevelRequest;
 import com.asiczen.analytics.response.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -86,34 +89,10 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
                 .map(Optional<VehicleHours>::get)
                 .map(record -> new VehicleHours(record.getVehicleNumber(), record.getIdleHourEngineOn() / 3600, record.getIdleHourEngineOff() / 3600, record.getMovingEngineOn() / 3600))
                 .collect(Collectors.toList());
-
-//        List<VehicleHours> data = messages.stream()
-//                .map(record -> new VehicleHours(record.getVehicleNumber(), record.getIdleKeyOnTime(), record.getIdleKeyOffTime(), record.getVehicleMovingTime()))
-//                .collect(Collectors.groupingBy(VehicleHours::getVehicleNumber))
-//                .entrySet()
-//                .stream()
-//                .collect(Collectors.toMap(vehicleHour -> {
-//                    int sumIdleKeyOnTime = vehicleHour.getValue().stream().mapToInt(VehicleHours::getIdleHourEngineOn).sum();
-//                    int sumIdleKeyOffTime = vehicleHour.getValue().stream().mapToInt(VehicleHours::getIdleHourEngineOff).sum();
-//                    int sumMovingEngineOn = vehicleHour.getValue().stream().mapToInt(VehicleHours::getMovingEngineOn).sum();
-//                    return new VehicleHours(vehicleHour.getKey(), sumIdleKeyOnTime, sumIdleKeyOffTime, sumMovingEngineOn);
-//
-//                }, Map.Entry::getValue));
-
-
-//        list.stream().collect(Collectors.groupingBy(Foo::getCategory))
-//                .entrySet().stream()
-//                .collect(Collectors.toMap(x -> {
-//                    int sumAmount = x.getValue().stream().mapToInt(Foo::getAmount).sum();
-//                    int sumPrice = x.getValue().stream().mapToInt(Foo::getPrice).sum();
-//                    return new Foo(x.getKey(), sumAmount, sumPrice);
-//                }, Map.Entry::getValue));
-
     }
 
     @Override
     public List<MessageCounter> getMessageCounter(OrgLevelRequest request) {
-        //List<MessageCounter> response = new ArrayList<>(); // Not used
         return new ArrayList<>();
     }
 
@@ -126,7 +105,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         List<VehicleStatusCounter> response = messages.stream()
                 .filter(message -> message.getCalculatedDailyDistance() > CALCULATED_DAILY_DISTANCE)
-                .collect(Collectors.groupingBy(record -> convertInToDateMonthYear(record), Collectors.counting()))
+                .collect(Collectors.groupingBy(this::convertInToDateMonthYear, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .map(entry -> new VehicleStatusCounter(entry.getValue().intValue(), 0, entry.getKey()))
@@ -134,7 +113,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         messages.stream()
                 .filter(message -> message.getCalculatedDailyDistance() == CALCULATED_DAILY_DISTANCE)
-                .collect(Collectors.groupingBy(record -> convertInToDateMonthYear(record), Collectors.counting()))
+                .collect(Collectors.groupingBy(this::convertInToDateMonthYear, Collectors.counting()))
                 .entrySet()
                 .stream()
                 .map(entry -> new VehicleStatusCounter(entry.getValue().intValue(), 0, entry.getKey()))
@@ -154,7 +133,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         List<VehicleActiveDistanceDTO> response = messages.stream()
                 .filter(message -> message.getCalculatedDailyDistance() > CALCULATED_DAILY_DISTANCE)
-                .collect(Collectors.groupingBy(record -> convertInToDateMonthYear(record), Collectors.summingDouble(record -> record.getCalculatedDailyDistance())))
+                .collect(Collectors.groupingBy(this::convertInToDateMonthYear, Collectors.summingDouble(EndOfDayMessage::getCalculatedDailyDistance)))
                 .entrySet()
                 .stream()
                 .map(entry -> new VehicleActiveDistanceDTO(entry.getKey(), 0, entry.getValue().longValue()))
@@ -162,7 +141,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         Map<String, Long> map = messages.stream()
                 .filter(message -> message.getCalculatedDailyDistance() > CALCULATED_DAILY_DISTANCE)
-                .collect(Collectors.groupingBy(record -> convertInToDateMonthYear(record), Collectors.counting()));
+                .collect(Collectors.groupingBy(this::convertInToDateMonthYear, Collectors.counting()));
 
         response.forEach(record -> updateActiveVehicleCountResponse(map, record));
 
@@ -170,6 +149,57 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
 
         return response;
     }
+
+    @Override
+    public List<DistanceByVehicleDTO> getDistanceByVehicleAndDates(OrganizationVehicleLevelRequest request) {
+
+        List<DistanceByVehicleDTO> messages =
+                eodMessageRepo.findByOrgRefNameAndTimestampBetweenAndVehicleNumber(request.getOrgRefName(),
+                        request.getFromDate(), request.getToDate(), request.getVehicleNumber())
+                        .stream()
+                        .map(this::convertToDistanceByVehicleDTO)
+                        .collect(Collectors.toList());
+
+        Collections.sort(messages);
+
+        return messages;
+    }
+
+    @Override
+    public List<VehicleNumberDistanceDTO> getDistanceByDateAndOrganization(OrgAndDateLevelRequest request) {
+
+        LocalDateTime startOfDay = request.getInputDate().toLocalDate().atStartOfDay();
+        LocalDateTime endOfDay = request.getInputDate().toLocalDate().atStartOfDay().plusDays(1l);
+
+        List<VehicleNumberDistanceDTO> messages = eodMessageRepo.findByorgRefNameAndTimestampBetween(request.getOrgRefName(), startOfDay, endOfDay)
+                .stream()
+                .map(this::convertToVehicleNumberDistanceDto)
+                .collect(Collectors.toList());
+
+        Collections.sort(messages);
+
+        return messages;
+
+    }
+
+    private VehicleNumberDistanceDTO convertToVehicleNumberDistanceDto(EndOfDayMessage message) {
+        VehicleNumberDistanceDTO response = new VehicleNumberDistanceDTO();
+        response.setVehicleNumber(message.getVehicleNumber());
+        response.setDistance((int) Math.round(message.getCalculatedDailyDistance()));
+        response.setMessageCounter(message.getMessageCounter());
+
+        return response;
+    }
+
+    private DistanceByVehicleDTO convertToDistanceByVehicleDTO(EndOfDayMessage message) {
+
+        DistanceByVehicleDTO response = new DistanceByVehicleDTO();
+        response.setDateTimeStamp(convertToLocalDateViaInstant(message.getTimestamp()));
+        response.setDistance((int) Math.round(message.getCalculatedDailyDistance()));
+
+        return response;
+    }
+
 
     private void updateActiveVehicleCountResponse(Map<String, Long> map, VehicleActiveDistanceDTO record) {
         record.setActiveVehicleCount(map.get(record.getDayOfMonth()).intValue());

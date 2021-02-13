@@ -1,6 +1,5 @@
 package com.asiczen.analytics.repository;
 
-import com.asiczen.analytics.model.EndOfDayMessage;
 import com.asiczen.analytics.model.OrganizationView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
