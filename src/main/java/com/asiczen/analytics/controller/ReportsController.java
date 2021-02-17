@@ -71,13 +71,13 @@ public class ReportsController {
 //    }
 
 
-    @GetMapping("/distanceByVehicle")
+    @PostMapping("/distanceByVehicle")
     @ResponseStatus(HttpStatus.OK)
     public GraphResponseDTO getDistanceByVehicleNumberAndDates(@Valid @RequestBody OrganizationVehicleLevelRequest organizationVehicleLevelRequest) {
         return new GraphResponseDTO(new Date(), service.getDistanceByVehicleAndDates(organizationVehicleLevelRequest));
     }
 
-    @GetMapping("/distanceByDateAndVehicle")
+    @PostMapping("/distanceByDateAndVehicle")
     @ResponseStatus(HttpStatus.OK)
     public GraphResponseDTO getDistanceByOrganizationAndDate(@Valid @RequestBody OrgAndDateLevelRequest orgAndDateLevelRequest) {
         return new GraphResponseDTO(new Date(), service.getDistanceByDateAndOrganization(orgAndDateLevelRequest));

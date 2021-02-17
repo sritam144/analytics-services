@@ -1,6 +1,7 @@
 package com.asiczen.analytics.response;
 
-import java.time.LocalDate;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DistanceByVehicleDTO implements Comparable<DistanceByVehicleDTO> {
 
-    LocalDate dateTimeStamp;
+    Date dateTimeStamp;
     int distance;
 
     @Override

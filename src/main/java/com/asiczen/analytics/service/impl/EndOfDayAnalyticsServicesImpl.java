@@ -194,7 +194,7 @@ public class EndOfDayAnalyticsServicesImpl implements EndOfDayAnalyticsServices 
     private DistanceByVehicleDTO convertToDistanceByVehicleDTO(EndOfDayMessage message) {
 
         DistanceByVehicleDTO response = new DistanceByVehicleDTO();
-        response.setDateTimeStamp(convertToLocalDateViaInstant(message.getTimestamp()));
+        response.setDateTimeStamp(message.getTimestamp());
         response.setDistance((int) Math.round(message.getCalculatedDailyDistance()));
 
         return response;
