@@ -28,7 +28,7 @@ public class VehicleLastLocResponse {
 	private double topSpeed;
 
 	private boolean current;
-	private int speed;
+	private double speed;
 	private int fuel;
 	
 	

@@ -33,8 +33,8 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
     @Transactional(readOnly = true)
     public VehicleHistoryResponse findByVehicleNumberAndTimeStampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime) {
 
-        log.trace("Start time {} ", startTime.toString());
-        log.trace("End TIme {} ", endTime.toString());
+        log.info("Start time {} ", startTime.toString());
+        log.info("End TIme {} ", endTime.toString());
 
         Optional<List<GeoMessage>> geoMessages = messageRepo.findByVehicleNumberAndTimestampBetween(vehicleNumber, startTime, endTime);
 

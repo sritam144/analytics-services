@@ -77,6 +77,7 @@ public class RedisConvertedMessageRepository {
 		response.setCurrent((TimeUnit.MILLISECONDS.toSeconds(timeDifference) <= 300) ? true : false);
 
 		response.setLastTime(message.getTimestamp());
+		response.setSpeed(Math.round(message.getCalculatedSpeed()));
 
 		return response;
 	}

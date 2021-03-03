@@ -203,12 +203,12 @@ public class RedisAnalyticsServiceImpl implements RedisService {
         List<VehicleLastLocResponse> vehicles = redisRepo.getLastLocationAllVehicles();
 
         response.setVehicleList(vehicles.stream()
-                .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() < 20d && item.getSpeed() > 5d)
+                .filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName) && item.getSpeed() < redisOrganizationMessageRepository.get(orgRefName).getUnderSpeedLimit() && item.getSpeed() > 5d)
                 .map(record -> new VehicleSpeedMatrix(record.getVehicleNumber(), record.getDriverName(), record.getSpeed(), getCurrentTimeStampInString()))
                 .collect(Collectors.toSet()));
 
         response.setCount((int) vehicles.stream().filter(item -> item.getOrgRefName().equalsIgnoreCase(orgRefName)
-                && item.getSpeed() < 20d && item.getSpeed() > 5d).distinct().count());
+                && item.getSpeed() < redisOrganizationMessageRepository.get(orgRefName).getUnderSpeedLimit() && item.getSpeed() > 5d).distinct().count());
 
         response.setTimeStamp(getCurrentTimeStampInString());
         response.setUnderSpeedLimit(redisOrganizationMessageRepository.get(orgRefName).getUnderSpeedLimit());
