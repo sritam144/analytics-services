@@ -31,7 +31,7 @@ public class MongoAnalyticServicesImpl implements MongoAnalyticServices {
 
     @Override
     @Transactional(readOnly = true)
-    public VehicleHistoryResponse findByVehicleNumberAndTimeStampBetween(String vehicleNumber, LocalDateTime startTime, LocalDateTime endTime) {
+    public VehicleHistoryResponse findByVehicleNumberAndTimeStampBetween(String vehicleNumber, Date startTime, Date endTime) {
 
         log.info("Start time {} ", startTime.toString());
         log.info("End TIme {} ", endTime.toString());

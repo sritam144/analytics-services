@@ -1,6 +1,7 @@
 package com.asiczen.analytics.request;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,11 +25,11 @@ public class VehicleHistoryRequest {
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "VehicleNumber can't have special characters")
     String vehicleNumber;
 
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime startDateTime;
+//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    Date startDateTime;
 
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime endDateTime;
+//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    Date endDateTime;
 }
